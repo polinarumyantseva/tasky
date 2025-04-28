@@ -1,0 +1,16 @@
+.search {
+	display: flex;
+	width: 400px;
+	height: 40px;
+	position: relative;
+
+	& > input {
+		padding: 10px 32px 10px 10px;
+	}
+
+	& > :global(.search-icon) {
+		position: absolute;
+		right: 10px;
+		top: 12px;
+	}
+}

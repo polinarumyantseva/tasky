@@ -1,0 +1,38 @@
+.primary-button,
+.secondary-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 16px;
+	height: 45px;
+	cursor: pointer;
+	color: #000;
+	border: none;
+	border-radius: 8px;
+	padding: 12px 20px;
+	transition: background-color 0.15s ease;
+
+	&[disabled],
+	&[disabled] {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+	&:global(.button-with-icon) {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+}
+.primary-button {
+	background: #fabb18;
+	&:hover {
+		background: #eead04;
+	}
+}
+.secondary-button {
+	background: #fff;
+	box-shadow: inset 0 0 0 1px #fabb18;
+	&:hover {
+		background: #fef7e7;
+	}
+}

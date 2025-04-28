@@ -1,0 +1,29 @@
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0 40px;
+	margin: auto 0 0;
+	gap: 20px;
+	& .page-button {
+		padding: 12px 13px;
+		width: 45px;
+		&.active {
+			background-color: #fabb18;
+			cursor: default;
+			opacity: 1;
+		}
+	}
+	& :global(.page-icon svg) {
+		width: 20px;
+		height: 20px;
+	}
+}
+
+.ellipsis {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+}

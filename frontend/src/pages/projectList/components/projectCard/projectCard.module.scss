@@ -1,0 +1,68 @@
+.project {
+	border: 1px solid #dadada;
+	border-radius: 14px;
+	padding: 24px;
+
+	&-name-block {
+		margin-bottom: 24px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		.action-block {
+			display: flex;
+			gap: 24px;
+			align-items: center;
+
+			&-icon {
+				cursor: pointer;
+			}
+		}
+	}
+
+	&-name {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		font-size: 20px;
+		font-weight: bold;
+
+		& :global(.folder-icon) {
+			background: #fef8e8;
+			width: 35px;
+			height: 35px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 50%;
+		}
+	}
+
+	.label {
+		font-weight: 600;
+	}
+
+	&-desc {
+		margin-bottom: 16px;
+		display: flex;
+		gap: 24px;
+	}
+	&-published-at {
+		margin-bottom: 16px;
+		display: flex;
+		align-items: center;
+		gap: 24px;
+	}
+
+	&-estimation {
+		display: flex;
+		align-items: center;
+		gap: 24px;
+
+		&-value {
+			background: #fff8e8;
+			padding: 11px 26px;
+			border-radius: 10px;
+		}
+	}
+}

@@ -1,0 +1,15 @@
+.name-block {
+	display: flex;
+	gap: 24px;
+
+	& > label:last-of-type {
+		max-width: 230px;
+	}
+}
+
+.form-buttons {
+	display: flex;
+	gap: 24px;
+	justify-content: end;
+	margin-top: 40px;
+}

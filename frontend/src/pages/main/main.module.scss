@@ -1,0 +1,51 @@
+.main-wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+
+.data-block {
+	&-title {
+		font-size: 36px;
+		font-weight: 600;
+		margin-bottom: 8px;
+	}
+	&-value {
+		font-size: 21px;
+	}
+}
+
+.info-block-wrapper {
+	display: flex;
+	gap: 40px;
+}
+
+.info-block-title {
+	font-size: 21px;
+	font-weight: 500;
+	margin-bottom: 16px;
+}
+
+.info-block-value {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	.value {
+		font-size: 18px;
+	}
+
+	.icon {
+		background: #fef8e8;
+		width: 60px;
+		height: 60px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 10px;
+
+		svg {
+			width: 25px;
+			height: 25px;
+		}
+	}
+}

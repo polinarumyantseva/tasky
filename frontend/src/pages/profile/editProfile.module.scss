@@ -1,0 +1,16 @@
+.profile-title-block {
+	display: flex;
+	justify-content: space-between;
+}
+
+.name-block {
+	display: flex;
+	gap: 24px;
+}
+
+.form-buttons {
+	display: flex;
+	gap: 24px;
+	justify-content: end;
+	margin-top: 40px;
+}
