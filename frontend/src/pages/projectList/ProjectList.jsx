@@ -33,7 +33,7 @@ export const ProjectList = () => {
 				</div>
 				{projects.length ? (
 					<div className={styles['projects-list']}>
-						{projects.map(({ id, title, estimation, description, publishedAt }) => (
+						{projects.map(({ id, title, estimation, description, publishedAt, totalTrackedTime }) => (
 							<ProjectCard
 								key={id}
 								id={id}
@@ -41,6 +41,7 @@ export const ProjectList = () => {
 								estimation={estimation}
 								description={description}
 								publishedAt={publishedAt}
+								totalTrackedTime={totalTrackedTime}
 							/>
 						))}
 					</div>

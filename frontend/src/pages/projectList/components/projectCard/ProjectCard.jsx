@@ -5,7 +5,7 @@ import { removeProjectAsync, CLOSE_MODAL, openModal } from '../../../../store/ac
 import { formatTime } from '../../../../utils';
 import styles from './projectCard.module.scss';
 
-export const ProjectCard = ({ id, title, estimation, description, publishedAt }) => {
+export const ProjectCard = ({ id, title, estimation, description, publishedAt, totalTrackedTime }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -53,6 +53,12 @@ export const ProjectCard = ({ id, title, estimation, description, publishedAt })
 				<p className={styles['label']}>Оценка трудозатрат:</p>
 				<p className={styles['project-estimation-value']}>{formatTime(estimation, false)}</p>
 			</div>
+			{totalTrackedTime > 0 && (
+				<div className={styles['project-estimation']}>
+					<p className={styles['label']}>Затрачено:</p>
+					<p className={styles['project-estimation-value']}>{formatTime(totalTrackedTime)}</p>
+				</div>
+			)}
 		</div>
 	);
 };

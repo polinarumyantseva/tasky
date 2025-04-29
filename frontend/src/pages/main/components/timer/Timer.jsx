@@ -47,8 +47,9 @@ export const Timer = ({ projects }) => {
 	const handleStopTimer = () => {
 		const endTime = Date.now();
 		const totalTime = timer.isPaused ? timer.totalTime : timer.totalTime + (endTime - timer.startTime);
+		const totalTimeInSeconds = Math.floor(totalTime / 1000);
 
-		dispatch(stopTimer(selectedOption.value, timer.timerId, endTime, totalTime));
+		dispatch(stopTimer(selectedOption.value, timer.timerId, endTime, totalTimeInSeconds));
 	};
 
 	return (
