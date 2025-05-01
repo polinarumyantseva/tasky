@@ -6,6 +6,18 @@
 		max-width: 230px;
 	}
 }
+.select-label {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+	width: 100%;
+	gap: 8px;
+}
+.select-project [class$='-control'] {
+	height: 45px;
+	border: 1px solid #939191;
+	border-radius: 8px;
+}
 
 .form-buttons {
 	display: flex;

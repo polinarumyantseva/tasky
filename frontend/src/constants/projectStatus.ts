@@ -1,0 +1,5 @@
+export enum PROJECT_STATUS {
+	OPEN,
+	IN_PROGRESS,
+	CLOSED,
+}
