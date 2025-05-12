@@ -21,6 +21,7 @@ export const timerReducer = (state = initialState, action: TimerActions) => {
 				projectId: action.payload.projectId,
 				isActive: true,
 				startTime: action.payload.startTime,
+				totalTime: 0,
 			};
 
 		case ACTION_TYPE.PAUSE_TIMER:

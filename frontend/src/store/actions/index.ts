@@ -11,3 +11,6 @@ export * from './startTimer';
 export * from './pauseTimer';
 export * from './resumeTimer';
 export * from './stopTimer';
+export * from './setStatusFilter';
+export * from './setEstimationFilter';
+export * from './resetFilters';

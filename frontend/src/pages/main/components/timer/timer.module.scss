@@ -1,6 +1,7 @@
 .timer-block-wrapper {
 	box-shadow: 0 10px 24px 4px #fabb18;
 	max-width: 600px;
+	height: 280px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -19,14 +20,6 @@
 		font-size: 21px;
 		font-weight: 500;
 	}
-	.icon-block {
-		width: 50px;
-		height: 50px;
-		svg {
-			width: 20px;
-			height: 20px;
-		}
-	}
 }
 
 .select-project [class$='-control'] {
@@ -41,11 +34,6 @@
 	margin-bottom: 20px;
 	width: 100%;
 	gap: 12px;
-}
-
-.timer-buttons {
-	display: flex;
-	gap: 16px;
 }
 
 .timer-display {

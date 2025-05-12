@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Select, { SingleValue } from 'react-select';
+import Select from 'react-select';
 import { useMatch, useNavigate, useParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -9,6 +9,7 @@ import { request, formatTime, timeToSeconds } from '../../../../utils';
 import { saveProjectAsync } from '../../../../store/actions';
 import { useCustomDispatch } from '../../../../hooks';
 import styles from './projectForm.module.scss';
+import { InputMask } from '@react-input/mask';
 
 const projectFormSchema = yup.object().shape({
 	title: yup.string().required('Необходимо заполнить Название проекта'),
@@ -83,15 +84,23 @@ export const ProjectForm = () => {
 				reset(data);
 			});
 		}
-	}, [dispatch, reset]);
+	}, []);
 
 	const onSubmit = (formData: ProjectData) => {
-		const { title, estimation, description } = formData;
+		const { title, estimation, description, totalTrackedTime, status } = formData;
 		const formatEstimation = timeToSeconds(estimation);
+		const formatTotalTrackedTime = totalTrackedTime ? timeToSeconds(totalTrackedTime) : 0;
+		const newStatus = status === 2 ? status : formatTotalTrackedTime === 0 ? 0 : 1;
 
-		dispatch(saveProjectAsync(id, { title, estimation: formatEstimation, description })).then(() =>
-			navigate('/projects')
-		);
+		dispatch(
+			saveProjectAsync(id, {
+				title,
+				estimation: formatEstimation,
+				description,
+				totalTrackedTime: formatTotalTrackedTime,
+				status: newStatus,
+			})
+		).then(() => navigate('/projects'));
 	};
 
 	return (
@@ -118,16 +127,25 @@ export const ProjectForm = () => {
 						/>
 					</label>
 
-					<Input
-						type='text'
-						placeholder='00:45'
+					<InputMask
+						component={Input}
+						placeholder='00:45:00'
+						mask='__:__:__'
+						replacement={{ _: /\d/ }}
 						label='Оценка трудозатрат'
+						showMask
+						separate
 						error={errors?.estimation?.message}
 						{...register('estimation')}
 					/>
-					<Input
-						type='text'
+					<InputMask
+						component={Input}
+						placeholder='00:45:00'
+						mask='__:__:__'
+						replacement={{ _: /\d/ }}
 						label='Затрачено (в часах)'
+						showMask
+						separate
 						error={errors?.totalTrackedTime?.message}
 						{...register('totalTrackedTime')}
 					/>

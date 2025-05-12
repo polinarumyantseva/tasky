@@ -1,4 +1,5 @@
 const Project = require('../models/Project');
+const PROJECT_STATUS = require('../constants/projectStatus');
 
 async function addProject(project) {
 	const newProject = await Project.create(project);
@@ -34,7 +35,17 @@ async function getProjects(search = '', limit = 10, page = 1) {
 }
 
 async function getProjectsTitle() {
-	return await Project.find({}).select('_id title');
+	return await Project.find({
+		status: { $ne: PROJECT_STATUS.CLOSED },
+	}).select('_id title');
+}
+
+function getProjectStatus() {
+	return [
+		{ id: PROJECT_STATUS.OPEN, name: 'Открыто' },
+		{ id: PROJECT_STATUS.IN_PROGRESS, name: 'В работе' },
+		{ id: PROJECT_STATUS.CLOSED, name: 'Закрыто' },
+	];
 }
 
 module.exports = {
@@ -44,4 +55,5 @@ module.exports = {
 	editProject,
 	deleteProject,
 	getProjectsTitle,
+	getProjectStatus,
 };

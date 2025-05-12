@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const projectStatus = require('../constants/projectStatus');
 
 const ProjectSchema = mongoose.Schema(
 	{
@@ -15,6 +16,10 @@ const ProjectSchema = mongoose.Schema(
 		totalTrackedTime: {
 			type: Number,
 			default: 0,
+		},
+		status: {
+			type: Number,
+			default: projectStatus.OPEN,
 		},
 	},
 	{ timestamps: true }

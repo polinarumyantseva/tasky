@@ -3,7 +3,26 @@
 	border-radius: 14px;
 	padding: 24px;
 
-	&-name-block {
+	&-status {
+		color: #fff;
+		width: 80px;
+		text-align: center;
+		padding: 4px 0;
+		border-radius: 4px;
+		font-size: 14px;
+		&-0 {
+			background-color: #66cc88;
+		}
+		&-1 {
+			background-color: #f8cd79;
+			color: #000;
+		}
+		&-2 {
+			background-color: #ee4242;
+		}
+	}
+
+	&-action-block {
 		margin-bottom: 24px;
 		display: flex;
 		justify-content: space-between;
@@ -26,6 +45,7 @@
 		gap: 16px;
 		font-size: 20px;
 		font-weight: bold;
+		margin-bottom: 24px;
 
 		& :global(.folder-icon) {
 			background: #fef8e8;
@@ -47,23 +67,29 @@
 		display: flex;
 		gap: 24px;
 	}
-	&-published-at {
-		margin-bottom: 16px;
+
+	&-estimation-block {
 		display: flex;
-		align-items: center;
-		gap: 24px;
+		gap: 60px;
+		margin-top: 30px;
 	}
 
+	&-published-at,
 	&-estimation {
 		display: flex;
-		align-items: center;
-		gap: 24px;
-		margin-bottom: 16px;
+		flex-direction: column;
+		align-items: baseline;
+		gap: 16px;
 
 		&-value {
 			background: #fff8e8;
 			padding: 11px 26px;
 			border-radius: 10px;
 		}
+	}
+	&-tracked-value {
+		background: #e4f6e9;
+		padding: 11px 26px;
+		border-radius: 10px;
 	}
 }

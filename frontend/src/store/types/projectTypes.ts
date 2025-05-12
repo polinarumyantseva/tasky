@@ -1,13 +1,14 @@
 import { ACTION_TYPE } from '../actions';
 
 export interface ProjectTypes {
-	id?: string;
+	id: string;
 	title: string;
 	estimation: number;
 	description?: string;
-	publishedAt?: Date;
-	totalTrackedTime?: number;
+	publishedAt: Date;
+	totalTrackedTime: number;
 	status: number;
+	statusName: string;
 }
 
 export type SetProjectsAction = {

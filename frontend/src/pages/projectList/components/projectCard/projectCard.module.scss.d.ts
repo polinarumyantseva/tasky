@@ -1,14 +1,21 @@
 declare const classNames: {
   readonly project: "project";
-  readonly "project-name-block": "project-name-block";
+  readonly "project-status": "project-status";
+  readonly "project-status-0": "project-status-0";
+  readonly "project-status-1": "project-status-1";
+  readonly "project-status-2": "project-status-2";
+  readonly "project-action-block": "project-action-block";
   readonly "action-block": "action-block";
   readonly "action-block-icon": "action-block-icon";
   readonly "project-name": "project-name";
   readonly "folder-icon": "folder-icon";
   readonly label: "label";
   readonly "project-desc": "project-desc";
+  readonly "project-estimation-block": "project-estimation-block";
   readonly "project-published-at": "project-published-at";
   readonly "project-estimation": "project-estimation";
+  readonly "project-published-at-value": "project-published-at-value";
   readonly "project-estimation-value": "project-estimation-value";
+  readonly "project-tracked-value": "project-tracked-value";
 };
 export = classNames;

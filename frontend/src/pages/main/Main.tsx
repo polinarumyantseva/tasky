@@ -16,6 +16,7 @@ interface IProject {
 export const Main = () => {
 	const roleId = useSelector(selectUserRoleId);
 	const [projects, setProjects] = useState<IProject[]>([]);
+	const [currentTime, setCurrentTime] = useState<string>(new Date().toLocaleString());
 	// const [projectsCount, setProjectsCount] = useState<number>(0);
 
 	useEffect(() => {
@@ -23,6 +24,12 @@ export const Main = () => {
 			setProjects(data);
 			// setProjectsCount(data.length);
 		});
+
+		const timerId = setInterval(() => {
+			setCurrentTime(new Date().toLocaleString());
+		}, 1000);
+
+		return () => clearInterval(timerId);
 	}, []);
 
 	if (roleId === ROLE.GUEST) {
@@ -33,7 +40,7 @@ export const Main = () => {
 		<LayoutWithAuthorization pageTitle='Главная'>
 			<div className={styles['data-block']}>
 				<p className={styles['data-block-title']}>Сегодня</p>
-				<p className={styles['data-block-value']}>{new Date().toLocaleString('ru')}</p>
+				<p className={styles['data-block-value']}>{currentTime}</p>
 			</div>
 
 			<Timer projects={projects} />

@@ -7,3 +7,4 @@ export * from './selectModalOnConfirm';
 export * from './selectModalText';
 export * from './selectSearchPhrase';
 export * from './selectTimer';
+export * from './selectFilters';

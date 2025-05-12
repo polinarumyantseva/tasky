@@ -19,7 +19,7 @@ const TimerSchema = mongoose.Schema(
 		endTime: {
 			type: Number,
 		},
-		duration: {
+		totalTime: {
 			type: Number,
 		},
 	},

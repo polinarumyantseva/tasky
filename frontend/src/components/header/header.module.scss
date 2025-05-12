@@ -24,3 +24,12 @@
 		justify-content: center;
 	}
 }
+
+.header-timer-display {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+	&-value {
+		font-size: 18px;
+	}
+}

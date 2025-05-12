@@ -7,3 +7,4 @@ export * from './layoutWithAuthorization/LayoutWithAuthorization';
 export * from './icon/Icon';
 export * from './infoCard/InfoCard';
 export * from './modal/Modal';
+export * from './timerButtons/TimerButtons';

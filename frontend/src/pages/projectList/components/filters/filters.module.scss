@@ -1,0 +1,32 @@
+/* styles.css */
+.project-filters {
+	display: flex;
+	gap: 20px;
+	width: 100%;
+}
+
+.filter-group {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	width: 100%;
+}
+
+.estimation-range {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.select-project [class$='-control'] {
+	height: 45px;
+	border: 1px solid #939191;
+	border-radius: 8px;
+}
+
+.select-label {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 8px;
+}
