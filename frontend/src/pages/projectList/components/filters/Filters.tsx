@@ -61,10 +61,11 @@ export const Filters = () => {
 							options={options}
 							placeholder='Статус...'
 							className={styles['select-project']}
-							value={status ? options.find((opt) => opt.value === status) : null}
+							value={status !== null ? options.find((opt) => opt.value === status) : null}
 							onChange={(newValue: SingleValue<OptionType>) =>
-								setStatus(newValue ? newValue.value : null)
+								setStatus(newValue !== null ? newValue.value : null)
 							}
+							isClearable
 						/>
 					</label>
 				</div>

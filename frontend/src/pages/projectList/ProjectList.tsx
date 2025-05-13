@@ -1,14 +1,20 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { SingleValue } from 'react-select';
 import { Button, Icon, LayoutWithAuthorization } from '../../components';
-import { Filters, Pagination, ProjectCard } from './components';
+import { Filters, Pagination, ProjectCard, SortControl } from './components';
 import { PAGINATION_LIMIT } from '../../constants/paginationLimit';
 import { setProjectsAsync } from '../../store/actions';
 import { selectFilters, selectProjects, selectSearchPhrase } from '../../store/selectors';
 import { useCustomDispatch } from '../../hooks';
 import { ProjectTypes } from '../../store/types';
 import styles from './projectList.module.scss';
+
+interface SortOptionsProps {
+	value: string;
+	label: string;
+}
 
 export const ProjectList = () => {
 	const navigate = useNavigate();
@@ -20,6 +26,7 @@ export const ProjectList = () => {
 	const [page, setPage] = useState<number>(1);
 	const [lastPage, setLastPage] = useState<number>(1);
 	const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+	const [selectedOption, setSelectedOption] = useState<SingleValue<SortOptionsProps>>(null);
 
 	useEffect(() => {
 		dispatch(setProjectsAsync(searchPhrase, page, PAGINATION_LIMIT)).then(({ lastPage }) => {
@@ -27,8 +34,27 @@ export const ProjectList = () => {
 		});
 	}, [page]);
 
+	const handleSort = (option: SingleValue<SortOptionsProps>) => {
+		setSelectedOption(option);
+	};
+
+	const compareValues = (a: ProjectTypes, b: ProjectTypes, value: string) => {
+		switch (value) {
+			case 'createdAtAsc':
+				return new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime();
+			case 'createdAtDesc':
+				return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+			case 'timeSpentAsc':
+				return a.totalTrackedTime - b.totalTrackedTime;
+			case 'timeSpentDesc':
+				return b.totalTrackedTime - a.totalTrackedTime;
+			default:
+				return 0;
+		}
+	};
+
 	const filteredProject = useMemo(() => {
-		return projects.filter((project) => {
+		let result = projects.filter((project) => {
 			if (filters.status !== null && filters.status !== project.status) {
 				return false;
 			}
@@ -42,21 +68,28 @@ export const ProjectList = () => {
 
 			return true;
 		});
-	}, [projects, filters]);
 
-	// TODO: изменить иконку у кнопки Фильтры
+		if (selectedOption) {
+			result = result.sort((a, b) => compareValues(a, b, selectedOption.value));
+		}
+
+		return result;
+	}, [projects, filters, selectedOption]);
 
 	return (
 		<LayoutWithAuthorization pageTitle='Проекты'>
 			<div className={styles.projects}>
 				<div className={styles['projects-create-block']}>
-					<Button
-						buttonType='secondary'
-						className='button-with-icon'
-						onClick={() => setIsFilterOpen(!isFilterOpen)}
-					>
-						<Icon name='create' /> Фильтры
-					</Button>
+					<div className={styles['filter-and-sort-block']}>
+						<Button
+							buttonType='secondary'
+							className='button-with-icon'
+							onClick={() => setIsFilterOpen(!isFilterOpen)}
+						>
+							<Icon name='filter' /> Фильтры
+						</Button>
+						<SortControl selectedOption={selectedOption} handleSort={handleSort} />
+					</div>
 					<Button buttonType='primary' className='button-with-icon' onClick={() => navigate('/project')}>
 						<Icon name='create' /> Создать проект
 					</Button>
