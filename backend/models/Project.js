@@ -7,6 +7,10 @@ const ProjectSchema = mongoose.Schema(
 			type: String,
 			required: true,
 		},
+		author: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User',
+		},
 		estimation: {
 			type: Number,
 		},

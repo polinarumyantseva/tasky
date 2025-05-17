@@ -3,7 +3,7 @@ import { AppDispatch } from '../store';
 import { ProjectTypes } from '../types';
 import { ACTION_TYPE } from './actionType';
 
-type ProjectWithoutFields = Omit<ProjectTypes, 'id' | 'statusName' | 'publishedAt'>;
+type ProjectWithoutFields = Omit<ProjectTypes, 'id' | 'statusName' | 'publishedAt' | 'author'>;
 
 export const saveProjectAsync =
 	(id: string | undefined, newProjectData: ProjectWithoutFields) => (dispatch: AppDispatch) => {

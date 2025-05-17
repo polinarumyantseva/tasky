@@ -3,6 +3,7 @@ import { ACTION_TYPE } from '../actions';
 export interface ProjectTypes {
 	id: string;
 	title: string;
+	author: string;
 	estimation: number;
 	description?: string;
 	publishedAt: Date;

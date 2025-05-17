@@ -1,5 +1,5 @@
 import { useMatch } from 'react-router-dom';
-import { ProjectForm } from './components';
+import { ProjectContent, ProjectForm } from './components';
 import { LayoutWithAuthorization } from '../../components';
 
 export const Project = () => {
@@ -8,7 +8,7 @@ export const Project = () => {
 
 	return (
 		<LayoutWithAuthorization pageTitle='Проекты'>
-			<div>{isCreating || isEditing ? <ProjectForm /> : <></>}</div>
+			<div>{isCreating || isEditing ? <ProjectForm /> : <ProjectContent />}</div>
 		</LayoutWithAuthorization>
 	);
 };

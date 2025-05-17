@@ -4,10 +4,12 @@ const PROJECT_STATUS = require('../constants/projectStatus');
 async function addProject(project) {
 	const newProject = await Project.create(project);
 
+	await newProject.populate('author');
+
 	return newProject;
 }
 function getProject(id) {
-	return Project.findById(id);
+	return Project.findById(id).populate('author');
 }
 
 function deleteProject(id) {
@@ -16,12 +18,15 @@ function deleteProject(id) {
 
 async function editProject(id, project) {
 	const updatedProject = await Project.findByIdAndUpdate(id, project, { returnDocument: 'after' });
+	await updatedProject.populate('author');
+
 	return updatedProject;
 }
 
 async function getProjects(search = '', limit = 10, page = 1) {
 	const [projects, count] = await Promise.all([
 		Project.find({ title: { $regex: search, $options: 'i' } })
+			.populate('author')
 			.limit(limit)
 			.skip((page - 1) * limit)
 			.sort({ createdAt: -1 }),

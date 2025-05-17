@@ -14,20 +14,28 @@ const router = express.Router({ mergeParams: true });
 // });
 
 router.get('/', authenticated, async (req, res) => {
-	const user = await getUser(req.user.id);
+	try {
+		const user = await getUser(req.user.id);
 
-	res.send({ data: mapUser(user) });
+		res.send({ data: mapUser(user) });
+	} catch (e) {
+		res.send({ error: e.message || 'Unknown error' });
+	}
 });
 
 router.patch('/', authenticated, async (req, res) => {
-	const newUser = await updateUser(req.user.id, {
-		name: req.body.name,
-		surname: req.body.surname,
-		email: req.body.email,
-		phone: req.body.phone,
-	});
+	try {
+		const newUser = await updateUser(req.user.id, {
+			name: req.body.name,
+			surname: req.body.surname,
+			email: req.body.email,
+			phone: req.body.phone,
+		});
 
-	res.send({ data: mapUser(newUser) });
+		res.send({ data: mapUser(newUser) });
+	} catch (e) {
+		res.send({ error: e.message || 'Unknown error' });
+	}
 });
 
 // router.get('/roles', authenticated, hasRole([ROLES.ADMIN]), async (req, res) => {

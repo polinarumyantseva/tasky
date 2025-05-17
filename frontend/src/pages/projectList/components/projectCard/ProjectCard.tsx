@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Icon } from '../../../../components';
 import { removeProjectAsync, CLOSE_MODAL, openModal } from '../../../../store/actions';
 import { formatTime } from '../../../../utils';
@@ -49,10 +49,10 @@ export const ProjectCard = ({
 				</div>
 			</div>
 
-			<div className={styles['project-name']}>
+			<Link to={`/project/${id}`} className={styles['project-name']}>
 				<Icon name='folder' className='folder-icon' />
 				{title}
-			</div>
+			</Link>
 			{description && (
 				<div className={styles['project-desc']}>
 					<p className={styles['label']}>Описание:</p>

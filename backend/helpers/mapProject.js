@@ -2,6 +2,7 @@ module.exports = function (project) {
 	return {
 		id: project.id,
 		title: project.title,
+		author: project.author.login,
 		estimation: project.estimation,
 		description: project.description,
 		publishedAt: project.createdAt,
