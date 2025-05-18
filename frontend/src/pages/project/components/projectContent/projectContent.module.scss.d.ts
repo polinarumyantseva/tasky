@@ -8,7 +8,5 @@ declare const classNames: {
   readonly "folder-icon": "folder-icon";
   readonly label: "label";
   readonly "project-value": "project-value";
-  readonly "project-estimation-value": "project-estimation-value";
-  readonly "project-tracked-value": "project-tracked-value";
 };
 export = classNames;

@@ -47,20 +47,9 @@
 	}
 
 	&-value {
-		margin-bottom: 24px;
+		margin-bottom: 16px;
 		display: flex;
 		align-items: center;
-		gap: 24px;
-	}
-
-	&-estimation-value {
-		background: #fff8e8;
-		padding: 11px 26px;
-		border-radius: 10px;
-	}
-	&-tracked-value {
-		background: #e4f6e9;
-		padding: 11px 26px;
-		border-radius: 10px;
+		gap: 8px;
 	}
 }

@@ -60,13 +60,13 @@ export const ProjectContent = () => {
 
 				<div className={styles['project-value']}>
 					<p className={styles['label']}>Оценка трудозатрат:</p>
-					<p className={styles['project-estimation-value']}>{formatTime(projectData.estimation)}</p>
+					<p>{formatTime(projectData.estimation)}</p>
 				</div>
 
 				{projectData.totalTrackedTime > 0 && (
 					<div className={styles['project-value']}>
 						<p className={styles['label']}>Затрачено:</p>
-						<p className={styles['project-tracked-value']}>{formatTime(projectData.totalTrackedTime)}</p>
+						<p>{formatTime(projectData.totalTrackedTime)}</p>
 					</div>
 				)}
 			</div>
