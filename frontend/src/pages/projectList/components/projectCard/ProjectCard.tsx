@@ -15,7 +15,7 @@ export const ProjectCard = ({
 	totalTrackedTime,
 	status,
 	statusName,
-}: ProjectTypes) => {
+}: Omit<ProjectTypes, 'author'>) => {
 	const navigate = useNavigate();
 	const dispatch = useCustomDispatch();
 

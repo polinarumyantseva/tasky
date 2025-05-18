@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { SingleValue } from 'react-select';
-import { Button, Icon, LayoutWithAuthorization } from '../../components';
+import { Button, Icon, LayoutWithAuthorization, Loader } from '../../components';
 import { Filters, Pagination, ProjectCard, SortControl } from './components';
 import { PAGINATION_LIMIT } from '../../constants/paginationLimit';
 import { setProjectsAsync } from '../../store/actions';
@@ -27,11 +27,19 @@ export const ProjectList = () => {
 	const [lastPage, setLastPage] = useState<number>(1);
 	const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
 	const [selectedOption, setSelectedOption] = useState<SingleValue<SortOptionsProps>>(null);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	useEffect(() => {
-		dispatch(setProjectsAsync(searchPhrase, page, PAGINATION_LIMIT)).then(({ lastPage }) => {
-			setLastPage(lastPage);
-		});
+		setIsLoading(true);
+		dispatch(setProjectsAsync(searchPhrase, page, PAGINATION_LIMIT))
+			.then(({ lastPage }) => {
+				setLastPage(lastPage);
+				setIsLoading(false);
+			})
+			.catch((e) => {
+				console.log(e);
+				setIsLoading(false);
+			});
 	}, [page]);
 
 	const handleSort = (option: SingleValue<SortOptionsProps>) => {
@@ -54,6 +62,7 @@ export const ProjectList = () => {
 	};
 
 	const filteredProject = useMemo(() => {
+		setIsLoading(true);
 		let result = projects.filter((project) => {
 			if (filters.status !== null && filters.status !== project.status) {
 				return false;
@@ -72,6 +81,8 @@ export const ProjectList = () => {
 		if (selectedOption) {
 			result = result.sort((a, b) => compareValues(a, b, selectedOption.value));
 		}
+
+		setIsLoading(false);
 
 		return result;
 	}, [projects, filters, selectedOption]);
@@ -96,7 +107,9 @@ export const ProjectList = () => {
 				</div>
 				{isFilterOpen && <Filters />}
 
-				{filteredProject.length ? (
+				{isLoading ? (
+					<Loader />
+				) : filteredProject.length ? (
 					<div className={styles['projects-list']}>
 						{filteredProject.map(
 							({
