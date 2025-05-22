@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
+import { InputMask } from '@react-input/mask';
 import { useMatch, useNavigate, useParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -9,7 +10,6 @@ import { request, formatTime, timeToSeconds } from '../../../../utils';
 import { saveProjectAsync } from '../../../../store/actions';
 import { useCustomDispatch } from '../../../../hooks';
 import styles from './projectForm.module.scss';
-import { InputMask } from '@react-input/mask';
 
 const projectFormSchema = yup.object().shape({
 	title: yup.string().required('Необходимо заполнить Название проекта'),
@@ -99,6 +99,10 @@ export const ProjectForm = () => {
 				description,
 				totalTrackedTime: formatTotalTrackedTime,
 				status: newStatus,
+				timeEntries: {
+					date: new Date(),
+					duration: formatTotalTrackedTime,
+				},
 			})
 		).then(() => navigate('/projects'));
 	};

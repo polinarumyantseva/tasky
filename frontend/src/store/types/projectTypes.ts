@@ -1,5 +1,9 @@
 import { ACTION_TYPE } from '../actions';
 
+interface TimeEntryTypes {
+	date: Date;
+	duration: number;
+}
 export interface ProjectTypes {
 	id: string;
 	title: string;
@@ -10,6 +14,7 @@ export interface ProjectTypes {
 	totalTrackedTime: number;
 	status: number;
 	statusName: string;
+	timeEntries: TimeEntryTypes[];
 }
 
 export type SetProjectsAction = {

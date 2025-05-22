@@ -1,0 +1,64 @@
+.weekly-chart-wrapper {
+	width: 100%;
+}
+.total-time-title {
+	font-size: 21px;
+	font-weight: 600;
+	margin-top: 12px;
+}
+.total-time-value {
+	background: #fff8e8;
+	padding: 11px 26px;
+	border-radius: 10px;
+	margin-left: 24px;
+}
+
+.no-time {
+	margin: 10px 0;
+}
+.weekly-time-block {
+	margin-top: 48px;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	width: 100%;
+}
+.weekly-time {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #dadada;
+	border-radius: 14px;
+	padding: 24px;
+	gap: 36px;
+
+	&-info {
+		display: flex;
+		align-items: center;
+	}
+
+	&-duration {
+		font-size: 21px;
+		margin-right: 24px;
+		min-width: 90px;
+	}
+	&-name {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		font-size: 18px;
+		font-weight: bold;
+		&:hover {
+			text-decoration: underline;
+		}
+
+		& :global(.folder-icon) {
+			background: #fef8e8;
+			width: 35px;
+			height: 35px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 50%;
+		}
+	}
+}

@@ -12,6 +12,12 @@ function getProject(id) {
 	return Project.findById(id).populate('author');
 }
 
+function getProjectByTime(time) {
+	return Project.find({
+		'timeEntries.date': { $gte: time },
+	}).populate('author');
+}
+
 function deleteProject(id) {
 	return Project.deleteOne({ _id: id });
 }
@@ -56,6 +62,7 @@ function getProjectStatus() {
 module.exports = {
 	getProject,
 	getProjects,
+	getProjectByTime,
 	addProject,
 	editProject,
 	deleteProject,

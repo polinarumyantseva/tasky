@@ -22,6 +22,10 @@ const TimerSchema = mongoose.Schema(
 		totalTime: {
 			type: Number,
 		},
+		isActive: {
+			type: Boolean,
+			default: false,
+		},
 	},
 	{ timestamps: true }
 );

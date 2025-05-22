@@ -2,6 +2,7 @@ const express = require('express');
 const {
 	getProjects,
 	getProject,
+	getProjectByTime,
 	addProject,
 	editProject,
 	deleteProject,
@@ -63,6 +64,48 @@ router.get('/:id', authenticated, async (req, res) => {
 	}
 });
 
+router.get('/analytics/daily', authenticated, async (req, res) => {
+	try {
+		const today = new Date();
+		today.setHours(0, 0, 0, 0);
+
+		const projects = await getProjectByTime(today);
+
+		const dailyData = projects.map((project) => ({
+			name: project.title,
+			duration: project.timeEntries
+				.filter((entry) => entry.date >= today)
+				.reduce((sum, entry) => sum + entry.duration, 0),
+		}));
+
+		res.send({ data: dailyData });
+	} catch (e) {
+		res.send({ error: e.message || 'Unknown error' });
+	}
+});
+
+router.get('/analytics/weekly', authenticated, async (req, res) => {
+	try {
+		const weekAgo = new Date();
+		weekAgo.setDate(weekAgo.getDate() - 7);
+
+		const projects = await getProjectByTime(weekAgo);
+
+		const weeklyData = projects.map((project) => ({
+			name: project.title,
+			projectId: project.id,
+			estimation: project.estimation,
+			duration: project.timeEntries
+				.filter((entry) => entry.date >= weekAgo)
+				.reduce((sum, entry) => sum + entry.duration, 0),
+		}));
+
+		res.send({ data: weeklyData });
+	} catch (e) {
+		res.send({ error: e.message || 'Unknown error' });
+	}
+});
+
 router.post('/', authenticated, async (req, res) => {
 	try {
 		const newProject = await addProject({
@@ -72,6 +115,7 @@ router.post('/', authenticated, async (req, res) => {
 			estimation: req.body.estimation,
 			totalTrackedTime: req.body.totalTrackedTime,
 			status: req.body.status,
+			timeEntries: req.body.totalTrackedTime ? req.body.timeEntries : [],
 		});
 
 		res.send({ data: mapProject(newProject) });
@@ -88,6 +132,7 @@ router.patch('/:id', authenticated, async (req, res) => {
 			estimation: req.body.estimation,
 			totalTrackedTime: req.body.totalTrackedTime,
 			status: req.body.status,
+			timeEntries: req.body.timeEntries,
 		});
 
 		res.send({ data: mapProject(updatedProject) });

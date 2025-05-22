@@ -8,14 +8,14 @@ import { selectUserRoleId } from '../../store/selectors';
 import { Timer } from './components';
 import styles from './main.module.scss';
 
-interface IProject {
+interface ProjectProps {
 	title: string;
 	_id: string;
 }
 
 export const Main = () => {
 	const roleId = useSelector(selectUserRoleId);
-	const [projects, setProjects] = useState<IProject[]>([]);
+	const [projects, setProjects] = useState<ProjectProps[]>([]);
 	const [currentTime, setCurrentTime] = useState<string>(new Date().toLocaleString());
 	// const [projectsCount, setProjectsCount] = useState<number>(0);
 

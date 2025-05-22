@@ -25,6 +25,16 @@ const ProjectSchema = mongoose.Schema(
 			type: Number,
 			default: projectStatus.OPEN,
 		},
+		timeEntries: [
+			{
+				date: {
+					type: Date,
+				},
+				duration: {
+					type: Number, // в секундах
+				},
+			},
+		],
 	},
 	{ timestamps: true }
 );

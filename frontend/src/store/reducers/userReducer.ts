@@ -8,6 +8,7 @@ const initialState: UserTypes = {
 	name: null,
 	surname: null,
 	email: null,
+	phone: null,
 	roleId: ROLE.GUEST,
 };
 

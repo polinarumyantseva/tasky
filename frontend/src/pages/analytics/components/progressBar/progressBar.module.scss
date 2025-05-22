@@ -1,0 +1,41 @@
+.progress-bar {
+	width: 100%;
+
+	&-labels {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 8px;
+		font-size: 14px;
+		color: #555;
+	}
+
+	&-total-label {
+		margin-top: 8px;
+		font-size: 14px;
+		text-align: right;
+		color: #555;
+	}
+	&-value {
+		color: #fff;
+		font-size: 12px;
+		font-weight: bold;
+		padding: 0 8px;
+	}
+	&-track {
+		width: 100%;
+		height: 20px;
+		background-color: #e0e0e0;
+		border-radius: 8px;
+		overflow: hidden;
+		position: relative;
+	}
+
+	&-bar {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		min-width: 20px;
+		height: 20px;
+		border-radius: 8px;
+	}
+}

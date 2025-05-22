@@ -30,9 +30,14 @@ export const ProjectContent = () => {
 
 	return (
 		<>
-			<Button buttonType='secondary' onClick={() => navigate('/projects')}>
-				Назад
-			</Button>
+			<div className={styles['project-buttons']}>
+				<Button buttonType='secondary' onClick={() => navigate(-1)}>
+					Назад
+				</Button>
+				<Button buttonType='primary' onClick={() => navigate(`/project/${id}/edit`)}>
+					Редактировать
+				</Button>
+			</div>
 			<div className={styles['project']}>
 				<div className={combinedClassName}>{projectData.statusName}</div>
 

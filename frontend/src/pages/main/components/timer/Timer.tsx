@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Select, { SingleValue } from 'react-select';
+import { useCustomDispatch } from '../../../../hooks';
 import { FormError, TimerButtons } from '../../../../components';
 import { selectTimer } from '../../../../store/selectors';
 import { formatTime } from '../../../../utils';
-// import { useCustomDispatch } from '../../../../hooks';
+import { startTimer } from '../../../../store/actions';
 import styles from './timer.module.scss';
 
 interface IProject {
@@ -21,7 +22,7 @@ interface OptionType {
 }
 
 export const Timer = ({ projects }: TimerProps) => {
-	// const dispatch = useCustomDispatch();
+	const dispatch = useCustomDispatch();
 	const [seconds, setSeconds] = useState<number>(0);
 	const [selectedOption, setSelectedOption] = useState<SingleValue<OptionType>>(null);
 	const [projectError, setProjectError] = useState<string | null>(null);
@@ -31,7 +32,17 @@ export const Timer = ({ projects }: TimerProps) => {
 
 	const timer = useSelector(selectTimer);
 
-	// console.log(timer);
+	const handleStartTimer = () => {
+		if (selectedOption) {
+			setProjectError(null);
+			dispatch(startTimer(selectedOption.value));
+			setSeconds(0);
+
+			// console.log(timer);
+		} else {
+			setProjectError('Необходимо выбрать проект');
+		}
+	};
 
 	useEffect(() => {
 		let interval: number;
@@ -49,8 +60,8 @@ export const Timer = ({ projects }: TimerProps) => {
 			<div className={styles['timer-block']}>
 				<p className={styles['title']}>{timer.isActive ? 'Остановить таймер' : 'Запустить таймер'}</p>
 				<TimerButtons
+					handleStartTimer={handleStartTimer}
 					setSeconds={setSeconds}
-					setProjectError={setProjectError}
 					selectedOption={selectedOption}
 					setSelectedOption={setSelectedOption}
 				/>

@@ -9,5 +9,6 @@ module.exports = function (project) {
 		totalTrackedTime: project.totalTrackedTime,
 		status: project.status,
 		statusName: project.statusName,
+		timeEntries: project.timeEntries,
 	};
 };
