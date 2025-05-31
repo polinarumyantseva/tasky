@@ -6,5 +6,6 @@ declare const classNames: {
   readonly "select-label": "select-label";
   readonly "timer-display": "timer-display";
   readonly "timer-display-value": "timer-display-value";
+  readonly "icon-block": "icon-block";
 };
 export = classNames;

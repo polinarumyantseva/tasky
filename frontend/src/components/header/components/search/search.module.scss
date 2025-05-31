@@ -3,6 +3,13 @@
 	width: 400px;
 	height: 40px;
 	position: relative;
+	@media (max-width: 1024px) {
+		width: 240px;
+	}
+	@media (max-width: 786px) {
+		margin: 24px 0 0;
+		width: 100%;
+	}
 
 	& > input {
 		padding: 10px 32px 10px 10px;

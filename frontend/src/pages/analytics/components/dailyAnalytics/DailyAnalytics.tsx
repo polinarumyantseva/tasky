@@ -73,7 +73,6 @@ export const DailyAnalytics = () => {
 							index: i,
 						}));
 					},
-					// boxWidth: 20,
 					padding: 20,
 					font: {
 						size: 14,

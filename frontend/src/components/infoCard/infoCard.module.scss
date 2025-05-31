@@ -5,4 +5,8 @@
 	padding: 24px 32px;
 	border-radius: 20px;
 	min-width: 240px;
+	@media (max-width: 768px) {
+		padding: 16px;
+		box-shadow: none;
+	}
 }

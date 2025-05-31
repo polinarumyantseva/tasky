@@ -75,6 +75,11 @@
 		display: flex;
 		gap: 60px;
 		margin-top: 30px;
+
+		@media (max-width: 786px) {
+			flex-direction: column;
+			gap: 24px;
+		}
 	}
 
 	&-published-at,

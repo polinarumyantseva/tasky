@@ -1,11 +1,11 @@
 import { useLayoutEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { setTimerData, setUser } from './store/actions';
+import { loadSavedTimer, setUser } from './store/actions';
+import { useCustomDispatch } from './hooks';
 import { Authorization, Registration, Main, ProjectList, Project, Analytics, EditProfile } from './pages';
 import { Modal, Error } from './components';
 import { ERROR } from './constants';
 import styles from './app.module.scss';
-import { useCustomDispatch } from './hooks';
 
 export const App = () => {
 	const dispatch = useCustomDispatch();
@@ -22,7 +22,7 @@ export const App = () => {
 			})
 		);
 
-		// dispatch(setTimerData());
+		dispatch(loadSavedTimer());
 	}, []);
 
 	return (

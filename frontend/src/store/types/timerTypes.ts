@@ -6,9 +6,9 @@ export interface TimerTypes {
 	isActive: boolean;
 	isPaused: boolean;
 	startTime: number;
-	pauseTime: number;
 	endTime: number;
 	totalTime: number;
+	lastUpdateTime: number;
 }
 
 export type StartTimerAction = {
@@ -22,17 +22,29 @@ export type StartTimerAction = {
 
 export type PauseTimerAction = {
 	type: ACTION_TYPE.PAUSE_TIMER;
-	payload: { pauseTime: number };
 };
 
 export type ResumeTimerAction = {
 	type: ACTION_TYPE.RESUME_TIMER;
-	payload: { resumeTime: number };
 };
 
 export type StopTimerAction = {
 	type: ACTION_TYPE.STOP_TIMER;
-	payload: { stopTime: number };
 };
 
-export type TimerActions = StartTimerAction | PauseTimerAction | ResumeTimerAction | StopTimerAction;
+export type UpdateTimerAction = {
+	type: ACTION_TYPE.UPDATE_TIMER;
+};
+
+export type LoadSavedTimerAction = {
+	type: ACTION_TYPE.LOAD_SAVED_TIMER;
+	payload: TimerTypes;
+};
+
+export type TimerActions =
+	| StartTimerAction
+	| PauseTimerAction
+	| ResumeTimerAction
+	| StopTimerAction
+	| UpdateTimerAction
+	| LoadSavedTimerAction;

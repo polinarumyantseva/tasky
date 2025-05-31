@@ -3,7 +3,6 @@ const PROJECT_STATUS = require('../constants/projectStatus');
 
 async function addProject(project) {
 	const newProject = await Project.create(project);
-
 	await newProject.populate('author');
 
 	return newProject;

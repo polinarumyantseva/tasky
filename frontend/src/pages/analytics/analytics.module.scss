@@ -2,4 +2,7 @@
 	display: flex;
 	justify-content: space-between;
 	gap: 48px;
+	@media (max-width: 1199px) {
+		flex-direction: column-reverse;
+	}
 }

@@ -1,23 +1,35 @@
 .layout {
 	display: flex;
 	position: relative;
+	@media (max-width: 1023px) {
+		flex-direction: column;
+	}
 }
 
 .content-wrapper {
 	padding-left: 270px;
 	width: 100%;
 	min-height: 100vh;
+	@media (max-width: 1023px) {
+		padding-left: 0;
+	}
 }
 .content {
 	background: #f9f9f9;
 	height: 100%;
 	border-radius: 20px 0 0 0;
 	padding: 40px;
+	@media (max-width: 480px) {
+		padding: 32px 20px;
+	}
 
 	.inner-content-block {
 		background: #fff;
 		box-shadow: 0 0px 10px 0 hsla(0, 0%, 0%, 0.2);
 		border-radius: 25px;
 		padding: 32px;
+		@media (max-width: 480px) {
+			padding: 32px 20px;
+		}
 	}
 }

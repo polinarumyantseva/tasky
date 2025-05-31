@@ -2,10 +2,6 @@ const Timer = require('../models/Timer');
 const Project = require('../models/Project');
 const PROJECT_STATUS = require('../constants/projectStatus');
 
-async function getActiveTimer(author) {
-	return Timer.findOne({ author, isActive: true });
-}
-
 async function startTimer(timer) {
 	const existingTimer = await Timer.findOne({ projectId: timer.projectId, author: timer.author });
 
@@ -33,7 +29,7 @@ async function stopTimer(projectId, timerId, endTime, totalTime, currentTime) {
 	await Project.findByIdAndUpdate(
 		projectId,
 		{
-			$set: { totalTrackedTime: totalTime },
+			$set: { totalTrackedTime: totalTime, status: PROJECT_STATUS.IN_PROGRESS },
 			$push: {
 				timeEntries: {
 					date: new Date(),
@@ -46,7 +42,6 @@ async function stopTimer(projectId, timerId, endTime, totalTime, currentTime) {
 }
 
 module.exports = {
-	getActiveTimer,
 	startTimer,
 	stopTimer,
 };

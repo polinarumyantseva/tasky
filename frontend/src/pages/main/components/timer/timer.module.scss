@@ -9,6 +9,9 @@
 	margin: 40px auto 60px;
 	padding: 32px 64px;
 	border-radius: 24px;
+	@media (max-width: 480px) {
+		padding: 32px;
+	}
 }
 
 .timer-block {
@@ -16,6 +19,9 @@
 	align-items: center;
 	gap: 32px;
 	margin-bottom: 32px;
+	@media (max-width: 480px) {
+		flex-direction: column;
+	}
 	.title {
 		font-size: 21px;
 		font-weight: 500;
@@ -44,5 +50,14 @@
 	text-align: center;
 	&-value {
 		font-size: 28px;
+	}
+}
+
+.icon-block {
+	width: 50px;
+	height: 50px;
+	svg {
+		width: 20px;
+		height: 20px;
 	}
 }

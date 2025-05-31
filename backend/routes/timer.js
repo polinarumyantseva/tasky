@@ -7,23 +7,33 @@ const { getProject } = require('../controllers/project');
 const router = express.Router({ mergeParams: true });
 
 router.post('/start', authenticated, async (req, res) => {
-	const newTimer = await startTimer({
-		projectId: req.body.projectId,
-		author: req.user.id,
-		startTime: Date.now(),
-		totalTime: 0,
-	});
+	try {
+		const newTimer = await startTimer({
+			projectId: req.body.projectId,
+			author: req.user.id,
+			startTime: Date.now(),
+			totalTime: 0,
+			isActive: true,
+		});
 
-	res.send({ data: mapTimer(newTimer) });
+		res.send({ data: mapTimer(newTimer) });
+	} catch (e) {
+		res.send({ error: e.message || 'Unknown error' });
+	}
 });
 
 router.post('/stop', authenticated, async (req, res) => {
-	const project = await getProject(req.body.projectId);
-	const totalTime = project.totalTrackedTime + req.body.totalTime;
+	try {
+		const project = await getProject(req.body.projectId);
+		const currentTimeValue = req.body.totalTime;
+		const totalTime = project.totalTrackedTime + currentTimeValue;
 
-	await stopTimer(req.body.projectId, req.body.timerId, req.body.endTime, totalTime);
+		await stopTimer(req.body.projectId, req.body.timerId, req.body.endTime, totalTime, currentTimeValue);
 
-	res.send({ error: null });
+		res.send({ error: null });
+	} catch (e) {
+		res.send({ error: e.message || 'Unknown error' });
+	}
 });
 
 module.exports = router;

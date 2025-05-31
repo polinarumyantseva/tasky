@@ -11,6 +11,7 @@ const {
 } = require('../controllers/project');
 const mapProject = require('../helpers/mapProject');
 const authenticated = require('../middlewares/authenticated');
+const PROJECT_STATUS = require('../constants/projectStatus');
 
 const router = express.Router({ mergeParams: true });
 
@@ -131,7 +132,7 @@ router.patch('/:id', authenticated, async (req, res) => {
 			description: req.body.description,
 			estimation: req.body.estimation,
 			totalTrackedTime: req.body.totalTrackedTime,
-			status: req.body.status,
+			status: req.body.totalTrackedTime ? req.body.status : PROJECT_STATUS.OPEN,
 			timeEntries: req.body.timeEntries,
 		});
 

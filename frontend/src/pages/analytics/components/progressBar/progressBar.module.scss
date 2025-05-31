@@ -7,6 +7,11 @@
 		margin-bottom: 8px;
 		font-size: 14px;
 		color: #555;
+		@media (max-width: 480px) {
+			& > span:last-of-type {
+				text-align: right;
+			}
+		}
 	}
 
 	&-total-label {

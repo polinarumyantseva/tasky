@@ -8,6 +8,11 @@
 		display: flex;
 		justify-content: space-between;
 		width: 100%;
+		@media (max-width: 786px) {
+			flex-direction: column-reverse;
+			align-items: baseline;
+			gap: 16px;
+		}
 	}
 
 	&-list {
@@ -21,6 +26,11 @@
 .filter-and-sort-block {
 	display: flex;
 	gap: 24px;
+	@media (max-width: 480px) {
+		flex-direction: column;
+		align-items: baseline;
+		gap: 16px;
+	}
 }
 
 .no-projects-found {

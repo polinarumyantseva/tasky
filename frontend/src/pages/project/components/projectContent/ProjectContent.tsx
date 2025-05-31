@@ -3,12 +3,16 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { formatTime, request } from '../../../../utils';
 import { ProjectTypes } from '../../../../store/types';
 import { Button, Icon } from '../../../../components';
+import { CLOSE_MODAL, openModal, removeProjectAsync } from '../../../../store/actions';
+import { useCustomDispatch } from '../../../../hooks';
 import styles from './projectContent.module.scss';
 
 export const ProjectContent = () => {
 	const navigate = useNavigate();
+	const dispatch = useCustomDispatch();
+
 	const { id } = useParams();
-	const [projectData, setProjectData] = useState<ProjectTypes>({
+	const [projectData, setProjectData] = useState<Omit<ProjectTypes, 'timeEntries'>>({
 		id: '',
 		title: '',
 		author: '',
@@ -26,6 +30,19 @@ export const ProjectContent = () => {
 		});
 	}, []);
 
+	const onProjectRemove = (id: string) => {
+		dispatch(
+			openModal({
+				text: 'Удалить проект?',
+				onConfirm: () => {
+					dispatch(removeProjectAsync(id)).then(() => navigate('/projects'));
+					dispatch(CLOSE_MODAL);
+				},
+				onCancel: () => dispatch(CLOSE_MODAL),
+			})
+		);
+	};
+
 	const combinedClassName = `${styles[`project-status`]} ${styles[`project-status-${projectData.status}`]}`;
 
 	return (
@@ -34,9 +51,14 @@ export const ProjectContent = () => {
 				<Button buttonType='secondary' onClick={() => navigate(-1)}>
 					Назад
 				</Button>
-				<Button buttonType='primary' onClick={() => navigate(`/project/${id}/edit`)}>
-					Редактировать
-				</Button>
+				{id && (
+					<>
+						<Button buttonType='primary' onClick={() => navigate(`/project/${id}/edit`)}>
+							Редактировать
+						</Button>
+						<Button onClick={() => onProjectRemove(id)}>Удалить</Button>
+					</>
+				)}
 			</div>
 			<div className={styles['project']}>
 				<div className={combinedClassName}>{projectData.statusName}</div>

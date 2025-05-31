@@ -8,6 +8,18 @@
 		padding: 50px 50px 50px 100px;
 		gap: 20px;
 
+		@media (max-width: 768px) {
+			padding: 32px 16px;
+			flex-direction: row;
+			gap: 32px;
+		}
+		@media (max-width: 480px) {
+			padding: 32px 24px 24px;
+			flex-direction: column;
+			gap: 18px;
+			align-items: baseline;
+		}
+
 		& > a {
 			margin-right: auto;
 		}
@@ -18,9 +30,19 @@
 		font-size: 30px;
 		font-weight: bold;
 		width: 350px;
+		@media (max-width: 768px) {
+			font-size: 21px;
+			width: auto;
+		}
+		@media (max-width: 480px) {
+			font-size: 18px;
+		}
 	}
 
 	&-img {
 		height: 300px;
+		@media (max-width: 768px) {
+			display: none;
+		}
 	}
 }
