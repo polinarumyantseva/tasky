@@ -1,13 +1,19 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Logo } from '../logo/Logo';
 import { Icon } from '../icon/Icon';
-import styles from './sidebar.module.scss';
 import { Button } from '../button/Button';
+import { ROLE } from '../../constants';
+import { checkAccess } from '../../utils';
+import { selectUserRoleId } from '../../store/selectors';
+import styles from './sidebar.module.scss';
 
 export const Sidebar = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 1024);
+	const roleId = useSelector(selectUserRoleId);
+	const isAdmin = checkAccess([ROLE.ADMIN], roleId);
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -42,14 +48,16 @@ export const Sidebar = () => {
 						<Icon name='sidebar-analytic' />
 						Аналитика
 					</NavLink>
-					<NavLink className={styles['sidebar-menu-item']} to='/time'>
-						<Icon name='sidebar-time' />
-						Время
-					</NavLink>
 					<NavLink className={styles['sidebar-menu-item']} to='/projects'>
 						<Icon name='sidebar-project' />
 						Проекты
 					</NavLink>
+					{isAdmin && (
+						<NavLink className={styles['sidebar-menu-item']} to='/users'>
+							<Icon name='sidebar-users' />
+							Пользователи
+						</NavLink>
+					)}
 				</div>
 			</div>
 

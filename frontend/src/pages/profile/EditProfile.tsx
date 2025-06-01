@@ -52,7 +52,7 @@ export const EditProfile = () => {
 	});
 
 	useEffect(() => {
-		request('/api/user').then(({ data }) => {
+		request('/api/users/user').then(({ data }) => {
 			setUserData(data);
 			reset(data);
 		});
@@ -66,7 +66,7 @@ export const EditProfile = () => {
 
 	const onSubmit = (formData: UserData) => {
 		const { name, surname, email, phone } = formData;
-		request('/api/user', 'PATCH', { name, surname, email, phone }).then(({ data }) => {
+		request('/api/users/user', 'PATCH', { name, surname, email, phone }).then(({ data }) => {
 			dispatch(setUser(data));
 			sessionStorage.setItem('userData', JSON.stringify(data));
 		});

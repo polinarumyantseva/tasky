@@ -1,1 +1,3 @@
-export const checkAccess = (access, userRole: number) => access.includes(userRole);
+import { ROLE } from '../constants';
+
+export const checkAccess = (access: ROLE[], userRole: number) => access.includes(userRole);

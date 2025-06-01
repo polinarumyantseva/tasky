@@ -2,7 +2,7 @@ import { useLayoutEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { loadSavedTimer, setUser } from './store/actions';
 import { useCustomDispatch } from './hooks';
-import { Authorization, Registration, Main, ProjectList, Project, Analytics, EditProfile } from './pages';
+import { Authorization, Registration, Main, ProjectList, Project, Analytics, EditProfile, Users } from './pages';
 import { Modal, Error } from './components';
 import { ERROR } from './constants';
 import styles from './app.module.scss';
@@ -33,6 +33,7 @@ export const App = () => {
 					<Route path='/login' element={<Authorization />} />
 					<Route path='/register' element={<Registration />} />
 					<Route path='/analytics' element={<Analytics />} />
+					<Route path='/users' element={<Users />} />
 					<Route path='/profile/edit' element={<EditProfile />} />
 					<Route path='/projects' element={<ProjectList />} />
 					<Route path='/project' element={<Project />} />

@@ -13,6 +13,8 @@ import { AppDispatch } from '../../store/store';
 import styles from './registration.module.scss';
 
 const regFormSchema = yup.object().shape({
+	name: yup.string().required('Необходимо заполнить Имя'),
+	surname: yup.string().required('Необходимо заполнить Фамилию'),
 	login: yup
 		.string()
 		.required('Необходимо заполнить логин')
@@ -21,7 +23,7 @@ const regFormSchema = yup.object().shape({
 		.max(15, 'Неверно заполнен логин. Максимум 15 символов'),
 	email: yup
 		.string()
-		.required('Необходимо заполнить логин')
+		.required('Необходимо заполнить поле Email')
 		.matches(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Неверный формат поля Email'),
 	password: yup
 		.string()
@@ -36,8 +38,8 @@ const regFormSchema = yup.object().shape({
 });
 
 interface UserData {
-	name?: string;
-	surname?: string;
+	name: string;
+	surname: string;
 	login: string;
 	email: string;
 	password: string;
@@ -81,8 +83,12 @@ export const Registration = () => {
 	};
 
 	const formError =
-		errors?.login?.message || errors?.email?.message || errors?.password?.message || errors?.passcheck?.message;
-	// const errorMessage = formError || serverError;  //TODO: добавить вывод ошибок сервера
+		errors?.name?.message ||
+		errors?.surname?.message ||
+		errors?.login?.message ||
+		errors?.email?.message ||
+		errors?.password?.message ||
+		errors?.passcheck?.message;
 
 	if (roleId !== ROLE.GUEST) {
 		return <Navigate to='/' />;
@@ -95,8 +101,20 @@ export const Registration = () => {
 				<Title>Регистрация</Title>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className={styles['fio-block']}>
-						<Input type='text' label='Имя' placeholder='Имя' {...register('name')} />
-						<Input type='text' label='Фамилия' placeholder='Фамилия' {...register('surname')} />
+						<Input
+							type='text'
+							label='Имя'
+							placeholder='Имя'
+							error={errors?.name?.message}
+							{...register('name', { onChange: () => setServerError(null) })}
+						/>
+						<Input
+							type='text'
+							label='Фамилия'
+							placeholder='Фамилия'
+							error={errors?.surname?.message}
+							{...register('surname', { onChange: () => setServerError(null) })}
+						/>
 					</div>
 					<Input
 						type='text'

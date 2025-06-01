@@ -64,7 +64,6 @@ export const Authorization = () => {
 	};
 
 	const formError = errors?.login?.message || errors?.password?.message;
-	// const errorMessage = formError || serverError; //TODO: добавить вывод ошибок сервера
 
 	if (roleId !== ROLE.GUEST) {
 		return <Navigate to='/' />;

@@ -7,13 +7,17 @@ const ROLES = require('../constants/roles');
 
 const router = express.Router({ mergeParams: true });
 
-// router.get('/', authenticated, hasRole([ROLES.ADMIN]), async (req, res) => {
-// 	const users = await getUsers();
+router.get('/', authenticated, hasRole([ROLES.ADMIN]), async (req, res) => {
+	try {
+		const users = await getUsers();
 
-// 	res.send({ data: users.map(mapUser) });
-// });
+		res.send({ data: users.map(mapUser) });
+	} catch (e) {
+		res.send({ error: e.message || 'Unknown error' });
+	}
+});
 
-router.get('/', authenticated, async (req, res) => {
+router.get('/user', authenticated, async (req, res) => {
 	try {
 		const user = await getUser(req.user.id);
 
@@ -23,7 +27,7 @@ router.get('/', authenticated, async (req, res) => {
 	}
 });
 
-router.patch('/', authenticated, async (req, res) => {
+router.patch('/user', authenticated, async (req, res) => {
 	try {
 		const newUser = await updateUser(req.user.id, {
 			name: req.body.name,
@@ -38,16 +42,24 @@ router.patch('/', authenticated, async (req, res) => {
 	}
 });
 
-// router.get('/roles', authenticated, hasRole([ROLES.ADMIN]), async (req, res) => {
-// 	const roles = getRoles();
+router.get('/roles', authenticated, hasRole([ROLES.ADMIN]), async (req, res) => {
+	try {
+		const roles = getRoles();
 
-// 	res.send({ data: roles });
-// });
+		res.send({ data: roles });
+	} catch (e) {
+		res.send({ error: e.message || 'Unknown error' });
+	}
+});
 
-// router.delete('/:id', authenticated, hasRole([ROLES.ADMIN]), async (req, res) => {
-// 	await deleteUser(req.params.id);
+router.delete('/:id', authenticated, hasRole([ROLES.ADMIN]), async (req, res) => {
+	try {
+		await deleteUser(req.params.id);
 
-// 	res.send({ error: null });
-// });
+		res.send({ error: null });
+	} catch (e) {
+		res.send({ error: e.message || 'Unknown error' });
+	}
+});
 
 module.exports = router;
