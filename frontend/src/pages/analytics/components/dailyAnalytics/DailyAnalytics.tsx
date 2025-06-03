@@ -109,7 +109,7 @@ export const DailyAnalytics = () => {
 	];
 
 	return (
-		<div className={styles['daily-chart-wrapper']}>
+		<div>
 			<InfoCard>
 				{dailyData.length > 0 ? (
 					<div className={styles['daily-chart']}>

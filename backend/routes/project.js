@@ -132,7 +132,7 @@ router.patch('/:id', authenticated, async (req, res) => {
 			description: req.body.description,
 			estimation: req.body.estimation,
 			totalTrackedTime: req.body.totalTrackedTime,
-			status: req.body.totalTrackedTime ? req.body.status : PROJECT_STATUS.OPEN,
+			status: req.body.status,
 			timeEntries: req.body.timeEntries,
 		});
 

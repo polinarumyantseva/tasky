@@ -2,8 +2,8 @@ import { ReactNode } from 'react';
 import { Sidebar } from '../sidebar/Sidebar';
 import { Header } from '../header/Header';
 import { PrivateContent } from '../privateContent/PrivateContent';
-import styles from './layoutWithAuthorization.module.scss';
 import { ROLE } from '../../constants';
+import styles from './layoutWithAuthorization.module.scss';
 
 interface LayoutWithAuthorizationProps {
 	pageTitle: string;

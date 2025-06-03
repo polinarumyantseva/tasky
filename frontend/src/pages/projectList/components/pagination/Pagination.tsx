@@ -14,44 +14,35 @@ export const Pagination = ({ page, lastPage, setPage }: PaginationProps) => {
 		const pages: PageItem[] = [];
 		pages.push(1);
 
-		// Определяем диапазон страниц вокруг текущей
 		const startPage = Math.max(2, page - 1);
 		const endPage = Math.min(lastPage - 1, page + 1);
 
-		// Добавляем страницы перед текущей
 		if (startPage > 2) {
-			// Если есть разрыв между первой и началом диапазона
 			if (startPage > 2) {
 				pages.push('...');
 			} else {
-				// Показываем все страницы до начала диапазона
 				for (let i = 2; i < startPage; i++) {
 					pages.push(i);
 				}
 			}
 		}
 
-		// Добавляем страницы в диапазоне вокруг текущей
 		for (let i = startPage; i <= endPage; i++) {
 			if (i > 1 && i < lastPage) {
 				pages.push(i);
 			}
 		}
 
-		// Добавляем страницы после текущей
 		if (endPage < lastPage - 1) {
-			// Если есть разрыв между концом диапазона и последней страницей
 			if (endPage < lastPage - 1) {
 				pages.push('...');
 			} else {
-				// Показываем все страницы до последней
 				for (let i = endPage + 1; i < lastPage; i++) {
 					pages.push(i);
 				}
 			}
 		}
 
-		// Всегда добавляем последнюю страницу, если она не первая
 		if (lastPage > 1) {
 			pages.push(lastPage);
 		}
