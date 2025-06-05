@@ -6,9 +6,11 @@ import sassDts from 'vite-plugin-sass-dts';
 export default defineConfig({
 	plugins: [react(), sassDts()],
 	server: {
+		host: true,
+		port: 3000,
 		proxy: {
 			'/api': {
-				target: 'http://localhost:3005',
+				target: 'http://backend:8000/',
 				changeOrigin: true,
 				secure: false,
 				rewrite: (path) => path.replace(/^\/api/, ''),
