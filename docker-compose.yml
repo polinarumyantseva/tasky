@@ -40,5 +40,5 @@ services:
         networks:
             - dev
 
-    volumes:
-        mongodb_data:
+volumes:
+    mongodb_data:
