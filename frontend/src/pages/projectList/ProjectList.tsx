@@ -121,7 +121,7 @@ export const ProjectList = () => {
 								totalTrackedTime,
 								status,
 								statusName,
-							}: ProjectTypes) => (
+							}: Omit<ProjectTypes, 'author' | 'timeEntries'>) => (
 								<ProjectCard
 									key={id}
 									id={id}

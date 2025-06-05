@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, ChartOptions, Plugin } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { formatTime, getRandomColor, request } from '../../../../utils';
 import { InfoCard } from '../../../../components';
@@ -35,14 +35,14 @@ export const DailyAnalytics = () => {
 		],
 	};
 
-	const options = {
+	const options: ChartOptions<'doughnut'> = {
 		plugins: {
 			tooltip: {
 				callbacks: {
 					label: (context) => {
-						return `Затрачено: ${formatTime(context.raw)}`;
+						return `Затрачено: ${formatTime(context.raw as number)}`;
 					},
-					title: (context) => {
+					title: (context: Array<{ label: string }>) => {
 						return `Проект: ${context[0].label}`;
 					},
 				},
@@ -61,12 +61,16 @@ export const DailyAnalytics = () => {
 			legend: {
 				position: 'bottom' as const,
 				labels: {
-					generateLabels: (chart) => {
+					generateLabels: (chart: ChartJS<'doughnut'>) => {
 						const data = chart.data;
+						const labels = data.labels as string[];
+						const dataset = data.datasets[0];
 
-						return data.labels.map((label: string, i: number) => ({
-							text: `${label}: ${formatTime(data.datasets[0].data[i])}`,
-							fillStyle: data.datasets[0].backgroundColor[i],
+						return labels.map((label: string, i: number) => ({
+							text: `${label}: ${formatTime(dataset.data[i] as number)}`,
+							fillStyle: Array.isArray(dataset.backgroundColor)
+								? (dataset.backgroundColor[i] as string)
+								: (dataset.backgroundColor as string),
 							strokeStyle: '#fff',
 							lineWidth: 1,
 							hidden: false,
@@ -86,10 +90,10 @@ export const DailyAnalytics = () => {
 		maintainAspectRatio: false,
 	};
 
-	const plugins = [
+	const plugins: Plugin<'doughnut'>[] = [
 		{
 			id: 'centerText',
-			beforeDraw: (chart) => {
+			beforeDraw: (chart: ChartJS<'doughnut'>) => {
 				if (chart.data.datasets.length === 0) return;
 
 				const total = chart.data.datasets[0].data.reduce((a: number, b: number) => a + b, 0);

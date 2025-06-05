@@ -43,7 +43,9 @@ export const ProjectContent = () => {
 		);
 	};
 
-	const combinedClassName = `${styles[`project-status`]} ${styles[`project-status-${projectData.status}`]}`;
+	type ProjectStatus = 0 | 1 | 2;
+	const status = projectData.status as ProjectStatus;
+	const combinedClassName = `${styles['project-status']} ${styles[`project-status-${status}`]}`;
 
 	return (
 		<>

@@ -99,10 +99,12 @@ export const ProjectForm = () => {
 				description,
 				totalTrackedTime: formatTotalTrackedTime,
 				status: newStatus,
-				timeEntries: {
-					date: new Date(),
-					duration: formatTotalTrackedTime,
-				},
+				timeEntries: [
+					{
+						date: new Date(),
+						duration: formatTotalTrackedTime,
+					},
+				],
 			})
 		).then(() => navigate('/projects'));
 	};

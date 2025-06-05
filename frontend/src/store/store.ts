@@ -15,7 +15,7 @@ export type RootState = ReturnType<typeof reducer>;
 export type RootActions = AppActions | UserActions | TimerActions | ProjectsActions | FilterActions;
 export type AppDispatch = typeof store.dispatch;
 
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancer = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = createStore(
 	reducer,

@@ -15,7 +15,7 @@ export const ProjectCard = ({
 	totalTrackedTime,
 	status,
 	statusName,
-}: Omit<ProjectTypes, 'author'>) => {
+}: Omit<ProjectTypes, 'author' | 'timeEntries'>) => {
 	const navigate = useNavigate();
 	const dispatch = useCustomDispatch();
 
@@ -32,7 +32,8 @@ export const ProjectCard = ({
 		);
 	};
 
-	const combinedClassName = `${styles[`project-status`]} ${styles[`project-status-${status}`]}`;
+	type ProjectStatus = 0 | 1 | 2;
+	const combinedClassName = `${styles[`project-status`]} ${styles[`project-status-${status as ProjectStatus}`]}`;
 
 	return (
 		<div className={styles['project']}>

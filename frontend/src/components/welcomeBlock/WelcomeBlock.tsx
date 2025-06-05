@@ -1,8 +1,8 @@
 import { Logo } from '../logo/Logo';
-import welcomeImg from '../../images/welcome-img.svg';
 import styles from './welcomeBlock.module.scss';
 
 export const WelcomeBlock = () => {
+	const welcomeImg = '/images/welcome-img.svg';
 	return (
 		<div className={styles['welcome-block']}>
 			<Logo />
