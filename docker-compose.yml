@@ -1,6 +1,9 @@
 networks:
     dev:
 
+volumes:
+    mongo_data:
+
 services:
     nginx:
         image: nginx:stable-alpine
@@ -19,6 +22,10 @@ services:
     backend:
         build:
             context: ./backend
+        environment:
+            MONGODB_CONNECTION_STRING: 'mongodb://user:mongopass@mongo:27017/tasky?authSource=admin'
+        depends_on:
+            - mongo
         networks:
             - dev
 
@@ -27,18 +34,17 @@ services:
             context: ./frontend
         networks:
             - dev
-
     mongo:
-        image: mongo:6.0
+        image: mongo:latest
         container_name: mongo
+        restart: always
         environment:
-            - MONGO_INITDB_ROOT_USERNAME=user
-            - MONGO_INITDB_ROOT_PASSWORD=mongopass
-            - MONGO_INITDB_DATABASE=tasky
+            MONGO_INITDB_DATABASE: tasky
+            MONGO_INITDB_ROOT_USERNAME: user
+            MONGO_INITDB_ROOT_PASSWORD: mongopass
         volumes:
-            - mongodb_data:/data/db
+            - mongo_data:/data/db
+        ports:
+            - '27017:27017'
         networks:
             - dev
-
-volumes:
-    mongodb_data:
