@@ -27,3 +27,18 @@ services:
             context: ./frontend
         networks:
             - dev
+
+    mongo:
+        image: mongo:6.0
+        container_name: mongo
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=user
+            - MONGO_INITDB_ROOT_PASSWORD=mongopass
+            - MONGO_INITDB_DATABASE=tasky
+        volumes:
+            - mongodb_data:/data/db
+        networks:
+            - dev
+
+    volumes:
+        mongodb_data:
