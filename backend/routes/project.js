@@ -11,7 +11,6 @@ const {
 } = require('../controllers/project');
 const mapProject = require('../helpers/mapProject');
 const authenticated = require('../middlewares/authenticated');
-const PROJECT_STATUS = require('../constants/projectStatus');
 
 const router = express.Router({ mergeParams: true });
 
