@@ -15,10 +15,6 @@ app.use(express.json());
 
 app.use('/', routes);
 
-app.get('/healthcheck', (req, res) => {
-	res.status(200).send('OK');
-});
-
 mongoose.connect(process.env.DB_CONNECTION_STRING).then(() => {
 	app.listen(port, () => {
 		console.log(`Server has been started on port ${port}...`);
